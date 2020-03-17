@@ -1,0 +1,26 @@
+body {
+    background-color: rgba(19, 17, 17, 0.932);
+}
+
+.signupForm {
+    position: relative;
+    left: 60%;
+    min-height: 500px;
+    width: 400px;
+    margin: 70px;
+}
+
+.usernameErrorLabel {
+    color: red;
+}
+
+.lead {
+    color: rgb(51, 121, 202);
+    text-align: center;
+    font-weight: 500;
+}
+
+.btn {
+    color: white;
+    background-color: rgb(51, 121, 202);
+}
