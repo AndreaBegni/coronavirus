@@ -1,8 +1,29 @@
-const dati = async () => {
-  let body = await fetch(
-    "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-province.json"
-  ).then(r => r.json());
-  console.log(body);
-};
+const registerButton = document.getElementById("loginButton");
+const username = document.getElementById("username");
+const password = document.getElementById("password");
+const authErrorLabel = document.getElementById("authErrorLabel");
 
-dati()
+loginButton.onclick = () => {
+  let url = "http://localhost:3000/users/" + username.value;
+  let data = {
+    password: password.value
+  };
+  const HTTPPost = {
+    headers: {
+      "content-type": "application/json; charset=UTF-8"
+    },
+    body: JSON.stringify(data),
+    method: "POST"
+  };
+  fetch(url, HTTPPost)
+    .then(response => response.json())
+    .then(data => {
+      if (data.authenticated){
+        document.cookie = "token=" + data.token; 
+        window.location.replace("http://www.google.it");
+      }
+      else if (!data.authenticated) {
+        authErrorLabel.innerHTML = " Username o password errati";
+      }
+    });
+};
