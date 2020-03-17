@@ -1,6 +1,6 @@
 const registerButton = document.getElementById("registerButton");
-const usern = document.getElementById("username");
-const pass = document.getElementById("password");
+const username = document.getElementById("username");
+const password = document.getElementById("password");
 const usernameErrorLabel = document.getElementById("usernameErrorLabel");
 
 registerButton.onclick = e => {
