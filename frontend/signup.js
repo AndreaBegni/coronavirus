@@ -21,7 +21,7 @@ registerButton.onclick = e => {
   fetch(url, HTTPPost)
     .then(response => response.json())
     .then(data => {
-      if (data.succes === "user registered")
+      if (data.success === "user registered")
         window.location.replace("http://localhost:5500/frontend/login.html");
       else if (data.error === "user alredy exists") {
         usernameErrorLabel.innerHTML = " *Username già esistente";
