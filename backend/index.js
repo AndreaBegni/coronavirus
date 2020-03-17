@@ -98,7 +98,7 @@ app.post("/users", async (req, res) => {
     .push(newUser)
     .write();
 
-  res.send();
+  res.send({success: "user registered"});
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
