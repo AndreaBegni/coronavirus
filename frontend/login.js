@@ -20,7 +20,7 @@ loginButton.onclick = () => {
     .then(data => {
       if (data.authenticated){
         document.cookie = "token=" + data.token; 
-        window.location.replace("http://www.google.it");
+        window.location.replace("http://localhost:5500/frontend/dashboard.html");
       }
       else if (!data.authenticated) {
         authErrorLabel.innerHTML = " Username o password errati";
