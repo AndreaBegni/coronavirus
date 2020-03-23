@@ -15,7 +15,8 @@
     "nodemon": "^2.0.2"
   },
   "scripts": {
-    "start": "nodemon index.js --ignore usersDB.json"
+    "start": "nodemon -r dotenv/config index.js --ignore usersDB.json dotenv_config_path=./sample.env",
+    "dev": "nodemon -r dotenv/config index.js --ignore usersDB.json dotenv_config_path=./dev.env"
   },
   "author": "",
   "license": "ISC"
