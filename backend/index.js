@@ -3,6 +3,7 @@ const express = require("express");
 const helmet = require("helmet");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const cors = require("cors");
 
 const app = express();
 const port = 4000;
@@ -10,6 +11,7 @@ const port = 4000;
 // middleware setup
 app.use(helmet());
 app.use(express.json());
+app.use(cors());
 
 const low = require("lowdb");
 const FileSync = require("lowdb/adapters/FileSync");
@@ -37,6 +39,9 @@ const validateToken = (req, res) => {
       return false;
     }
   });
+
+  return true;
+
 };
 
 //it checks if the authentication token passed in the header is valid
@@ -100,7 +105,7 @@ app.post("/users", async (req, res) => {
     .push(newUser)
     .write();
 
-  res.send({success: "user registered"});
+  res.send({ success: "user registered" });
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
