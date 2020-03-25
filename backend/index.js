@@ -53,16 +53,19 @@ app.get("/test", (req, res) => {
 app.post("/users/:username", async (req, res) => {
   const password = req.body.password;
   const username = req.params.username;
-  
+
   const user = db
     .get("users")
     .find({ username })
     .value();
-
-  const authenticated = await bcrypt.compare(password, user.hashedPassword);
-  const token = jwt.sign({ username }, process.env.SECRET, {
-    expiresIn: 86400
-  });
+  let authenticated = false;
+  let token = "";
+  if (user !== undefined) {
+    authenticated = await bcrypt.compare(password, user.hashedPassword);
+    token = jwt.sign({ username }, process.env.SECRET, {
+      expiresIn: 86400
+    });
+  }
   res.send({
     authenticated,
     token
