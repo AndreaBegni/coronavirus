@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const app = express();
-const port = 3000;
+const port = 4000;
 
 // middleware setup
 app.use(helmet());
@@ -20,13 +20,13 @@ const db = low(adapter);
 // Set some defaults (required if your JSON file is empty)
 db.defaults({ users: [] }).write();
 
-const validateToken = async (req, res) => {
+const validateToken = (req, res) => {
   const token = req.headers["x-access-token"];
   if (!token) {
     res.status(403).json({
       error: "unauthorized"
     });
-    return;
+    return false;
   }
 
   jwt.verify(token, process.env.SECRET, (err, decoded) => {
@@ -34,16 +34,15 @@ const validateToken = async (req, res) => {
       res.status(403).json({
         error: "unauthorized"
       });
-      return;
+      return false;
     }
   });
 };
 
 //it checks if the authentication token passed in the header is valid
-app.get("/test", async (req, res) => {
-  validateToken(req, res);
-
-  res.send({ status: "ok" });
+app.get("/test", (req, res) => {
+  if (validateToken(req, res))
+    res.send({ status: "ok" });
 });
 
 //it takes the URI parameter after /users/ as the user's username
@@ -54,7 +53,7 @@ app.get("/test", async (req, res) => {
 app.post("/users/:username", async (req, res) => {
   const password = req.body.password;
   const username = req.params.username;
-
+  
   const user = db
     .get("users")
     .find({ username })
