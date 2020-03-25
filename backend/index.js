@@ -3,6 +3,7 @@ const express = require("express");
 const helmet = require("helmet");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const cors = require("cors");
 
 const app = express();
 const port = 4000;
@@ -10,6 +11,7 @@ const port = 4000;
 // middleware setup
 app.use(helmet());
 app.use(express.json());
+app.use(cors());
 
 const low = require("lowdb");
 const FileSync = require("lowdb/adapters/FileSync");

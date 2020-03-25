@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "bcrypt": "^4.0.1",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "helmet": "^3.21.3",
@@ -19,5 +20,6 @@
     "dev": "nodemon -r dotenv/config index.js --ignore usersDB.json dotenv_config_path=./dev.env"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "proxy": "http://localhost:4000"
 }
