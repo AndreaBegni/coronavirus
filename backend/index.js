@@ -37,6 +37,8 @@ const validateToken = (req, res) => {
       return false;
     }
   });
+
+  return true;
 };
 
 //it checks if the authentication token passed in the header is valid
