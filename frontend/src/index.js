@@ -3,16 +3,20 @@ import ReactDOM from "react-dom";
 import Signin from "./Signin";
 import Signup from "./Signup";
 import Dashboard from "./Dashboard";
+import PageNotFound from "./PageNotFound";
 import * as serviceWorker from "./serviceWorker";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <Route path="/signup" component={Signup} />
-      <Route path="/signin" component={Signin} />
-      <Route path="/dashboard" component={Dashboard} />
+      <Switch>
+        <Route path="/signup" component={Signup} />
+        <Route path="/signin" component={Signin} />
+        <Route path="/dashboard" component={Dashboard} />
+        <Route component={PageNotFound}></Route>
+      </Switch>
     </Router>
   </React.StrictMode>,
   document.getElementById("root")
