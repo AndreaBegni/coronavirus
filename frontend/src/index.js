@@ -4,6 +4,7 @@ import Signin from "./Signin";
 import Signup from "./Signup";
 import Dashboard from "./Dashboard";
 import PageNotFound from "./PageNotFound";
+import PrivateRoute from "./PrivateRoute";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -14,7 +15,7 @@ ReactDOM.render(
       <Switch>
         <Route path="/signup" component={Signup} />
         <Route path="/signin" component={Signin} />
-        <Route path="/dashboard" component={Dashboard} />
+        <PrivateRoute path="/dashboard" authComponent={Dashboard} />
         <Route component={PageNotFound}></Route>
       </Switch>
     </Router>
