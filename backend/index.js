@@ -4,6 +4,7 @@ const helmet = require("helmet");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
+const axios = require("axios");
 
 const app = express();
 const port = 4000;
@@ -42,6 +43,24 @@ const validateToken = (req, res) => {
 
   return true;
 };
+
+const fetchData = async () => {
+  let retrivedData;
+  retrivedData = await axios
+    .get(
+      "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-andamento-nazionale.json"
+    )
+    .then(r => r.data);
+  return { data: retrivedData };
+};
+
+app.get("/data", async (req, res) => {
+  if (validateToken(req, res)) {
+    let data = await fetchData();
+    if (data !== undefined) 
+      res.send(data);
+  }
+});
 
 //it checks if the authentication token passed in the header is valid
 app.get("/test", (req, res) => {
