@@ -6,13 +6,14 @@ import Dashboard from "./Dashboard";
 import PageNotFound from "./PageNotFound";
 import PrivateRoute from "./PrivateRoute";
 import * as serviceWorker from "./serviceWorker";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Switch>
+        <Redirect exact from="/" to="/signup" />
         <Route path="/signup" component={Signup} />
         <Route path="/signin" component={Signin} />
         <PrivateRoute path="/dashboard" authComponent={Dashboard} />
