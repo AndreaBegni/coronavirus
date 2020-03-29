@@ -8,7 +8,8 @@ export default class Signin extends Component {
 
     this.state = {
       registered: false,
-      authError: false
+      authError: false,
+      accessClicked: false
     };
 
     this.username = React.createRef();
@@ -45,8 +46,17 @@ export default class Signin extends Component {
     if (this.state.authError) return "*Username già esistente";
   };
 
+  accessButton = () => {
+    this.setState({
+      accessClicked: true
+    });
+  };
+
   render = () => {
     if (this.state.registered) {
+      return <Redirect to={"/signin"} />;
+    }
+    if (this.state.accessClicked) {
       return <Redirect to={"/signin"} />;
     }
     return (
@@ -72,6 +82,10 @@ export default class Signin extends Component {
               {this.showError()}
             </p>
           </Form>
+          <p>Hai già un account?</p>
+          <p>
+            <p onClick={() => this.accessButton()}>Registrati</p>
+          </p>
         </Jumbotron>
       </div>
     );

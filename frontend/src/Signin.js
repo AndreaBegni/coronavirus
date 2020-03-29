@@ -9,7 +9,8 @@ export default class Signin extends Component {
 
     this.state = {
       authenticated: false,
-      authError: false
+      authError: false,
+      registerClicked: false
     };
 
     this.username = React.createRef();
@@ -42,6 +43,12 @@ export default class Signin extends Component {
     if (this.state.authError) return "Username o password errati";
   };
 
+  registerButton = () => {
+    this.setState({
+      registerClicked: true
+    });
+  };
+
   render = () => {
     //checks if it comes from a private route
     let { from } = this.props.location;
@@ -59,6 +66,9 @@ export default class Signin extends Component {
     //by default /dashboard
     if (this.state.authenticated) {
       return <Redirect to={from} />;
+    }
+    if (this.state.registerClicked) {
+      return <Redirect to={"/signup"} />;
     }
     return (
       <div className="signinForm">
@@ -81,6 +91,10 @@ export default class Signin extends Component {
             </Button>
             <p className="authErrorLabel" id="authErrorLabel">
               {this.showError()}
+            </p>
+            <p>Non hai un account?</p>
+            <p>
+              <p onClick={() => this.registerButton()}>Registrati</p>
             </p>
           </Form>
         </Jumbotron>
