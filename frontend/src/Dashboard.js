@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
+import SimpleChart from "./SimpleChart";
 
 export default class PrivateRoute extends Component {
   constructor(props) {
@@ -7,6 +8,7 @@ export default class PrivateRoute extends Component {
 
     this.state = {
       authenticated: false,
+      data: null,
       loading: true
     };
   }
@@ -32,19 +34,18 @@ export default class PrivateRoute extends Component {
     }
     this.setState({
       authenticated: isValid,
-      loading: false
+      loading: false,
+      data: retrivedData.data
     });
-    return retrivedData.data;
   };
 
   render() {
-    let data;
     if (this.state.loading) {
-      data = this.retriveData();
+      this.retriveData();
       return <div>Checking authorization</div>;
     } else {
       if (this.state.authenticated) {
-        return <div>{data}</div>;
+        return <SimpleChart data={this.state.data}></SimpleChart>;
       } else {
         return (
           <Redirect
