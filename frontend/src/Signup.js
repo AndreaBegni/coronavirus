@@ -84,7 +84,7 @@ export default class Signin extends Component {
           </Form>
           <p>Hai già un account?</p>
           <p>
-            <p onClick={() => this.accessButton()}>Registrati</p>
+            <p onClick={() => this.accessButton()}>Accedi</p>
           </p>
         </Jumbotron>
       </div>
