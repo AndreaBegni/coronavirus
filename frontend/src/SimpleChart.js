@@ -30,7 +30,7 @@ export default class Example extends PureComponent {
 
   setTicks = () => {
     let max = Math.max(
-      ...this.state.data.map(day => day.totale_attualmente_positivi)
+      ...this.state.data.map(day => day.totale_positivi)
     );
     let ticks = [],
       i = 0;
@@ -43,7 +43,7 @@ export default class Example extends PureComponent {
 
   domain = () => {
     let max = Math.max(
-      ...this.state.data.map(day => day.totale_attualmente_positivi)
+      ...this.state.data.map(day => day.totale_positivi)
     );
     return [0, max];
   };
@@ -68,7 +68,7 @@ export default class Example extends PureComponent {
         <Legend />
         <Line
           type="monotone"
-          dataKey="totale_attualmente_positivi"
+          dataKey="totale_positivi"
           stroke="#0000ff"
           activeDot={{ r: 3 }}
         />
