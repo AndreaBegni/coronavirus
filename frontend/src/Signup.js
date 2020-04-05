@@ -9,7 +9,7 @@ export default class Signin extends Component {
     this.state = {
       registered: false,
       authError: false,
-      accessClicked: false
+      accessClicked: false,
     };
 
     this.username = React.createRef();
@@ -20,17 +20,17 @@ export default class Signin extends Component {
     let url = "http://localhost:4000/users";
     let postData = {
       username: this.username.current.value,
-      password: this.password.current.value
+      password: this.password.current.value,
     };
     const HTTPPost = {
       headers: {
-        "content-type": "application/json; charset=UTF-8"
+        "content-type": "application/json; charset=UTF-8",
       },
       body: JSON.stringify(postData),
-      method: "POST"
+      method: "POST",
     };
     let isRegistered = false;
-    let data = await fetch(url, HTTPPost).then(response => response.json());
+    let data = await fetch(url, HTTPPost).then((response) => response.json());
     if (data.success === "user registered") {
       isRegistered = true;
     } else if (data.error === "user alredy exists") {
@@ -38,7 +38,7 @@ export default class Signin extends Component {
     }
     this.setState({
       registered: isRegistered,
-      authError: !isRegistered
+      authError: !isRegistered,
     });
   };
 
@@ -48,7 +48,7 @@ export default class Signin extends Component {
 
   accessButton = () => {
     this.setState({
-      accessClicked: true
+      accessClicked: true,
     });
   };
 
@@ -83,9 +83,7 @@ export default class Signin extends Component {
             </p>
           </Form>
           <p>Hai già un account?</p>
-          <p>
-            <p onClick={() => this.accessButton()}>Accedi</p>
-          </p>
+          <p onClick={() => this.accessButton()}>Accedi</p>
         </Jumbotron>
       </div>
     );
