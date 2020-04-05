@@ -10,7 +10,7 @@ export default class Signin extends Component {
     this.state = {
       authenticated: false,
       authError: false,
-      registerClicked: false
+      registerClicked: false,
     };
 
     this.username = React.createRef();
@@ -20,22 +20,24 @@ export default class Signin extends Component {
   login = async () => {
     let url = "http://localhost:4000/users/" + this.username.current.value;
     let postData = {
-      password: this.password.current.value
+      password: this.password.current.value,
     };
     const HTTPPost = {
       headers: {
-        "content-type": "application/json; charset=UTF-8"
+        "content-type": "application/json; charset=UTF-8",
       },
       body: JSON.stringify(postData),
-      method: "POST"
+      method: "POST",
     };
-    let response = await fetch(url, HTTPPost).then(response => response.json());
+    let response = await fetch(url, HTTPPost).then((response) =>
+      response.json()
+    );
     if (response.authenticated) {
       document.cookie = "token=" + response.token;
     }
     this.setState({
       authenticated: response.authenticated,
-      authError: !response.authenticated
+      authError: !response.authenticated,
     });
   };
 
@@ -45,7 +47,7 @@ export default class Signin extends Component {
 
   registerButton = () => {
     this.setState({
-      registerClicked: true
+      registerClicked: true,
     });
   };
 
@@ -93,9 +95,7 @@ export default class Signin extends Component {
               {this.showError()}
             </p>
             <p>Non hai un account?</p>
-            <p>
-              <p onClick={() => this.registerButton()}>Registrati</p>
-            </p>
+            <p onClick={() => this.registerButton()}>Registrati</p>
           </Form>
         </Jumbotron>
       </div>
